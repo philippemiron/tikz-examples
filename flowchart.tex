@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{geometry}
+ \geometry{
+ letterpaper,
+ left=1in,
+ right=1in,
+ top=1in,
+ bottom=1in,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath,float}
+\floatplacement{figure}{H}
+\usepackage{hyperref}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.12}
+
+\graphicspath{{./images/}}
+\input{math_commands}
+
+% used tikz libraries
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{trees}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{chains}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes}
+\usetikzlibrary{matrix}
+
+\begin{document}
+
+%=== SCHÉMA GLOBAL MÉTHODE INVERSE ===%
+\begin{figure}[!ht]
+\centering
+\tikzset{
+	My Line Style/.style={smooth, ultra thick, samples=400},
+	punktchain/.style={
+		rectangle, 
+		rounded corners, 
+		% fill=black!10,
+		draw=black, very thick,
+		text width=20em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	line/.style={draw, thick, <-},
+	punktchain2/.style={
+		rectangle, 
+		rounded corners, 
+		% fill=black!10,
+		draw=black, very thick,
+		text width=15em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt,>=stealth},
+	decorate sep/.style 2 args=
+	{decorate,decoration={shape backgrounds,shape=circle,shape size=#1,shape sep=#2}}
+}
+
+\begin{tikzpicture}
+[node distance=.8cm,
+start chain=going below,]
+\draw (0,1.3) node{};
+\draw (0,-15.5) node{};
+\node[punktchain,dashed] (0) {Mesures \mbox{expérimentales} du courant de diffusion $I(t)$ et calcul du transfert de masse \vspace{-0.3cm}
+	\begin{align*} 
+	K(t)=\dfrac{I(t)}{nFAC_0} \to Sh_{exp}(t^*) = \dfrac{K(t^*)l}{D}
+	\end{align*}
+};
+\node[punktchain] (1) {1. Résolution de XYZ avec $\hat{S}^*(t^*_k)$, une bonne approximation de $S^*(t^*_k)$};
+%     \draw[decorate sep={0.8mm}{1.2mm},fill] (0) -- (1);
+\node[punktchain, join] (2) {2. Évaluation de $\hat{\Sh}(t^*_k)$ en intégrant le transfert de masse à la sonde, d'après XYZ};
+\node[punktchain, join] (3) {3. Calcul de $\partial\hat{Sh}(t^*_k)/\partial{S^*}$ (c.f. sect. XYZ) et correction de $\hat{S}^*(t^*_k)$: \vspace{-0.4cm}
+	\begin{align*}
+	S^*_i(t^*_k) &= \hat{S}^*(t^*_k) + dS
+	\end{align*} };
+\node[punktchain, join] (4) {4. Résolution de XYZ0 avec $S^*_i(t^*_k)$, puis évaluation de $Sh_i(t^*_k)$ avec XYZ};
+\node[punktchain, join] (5) {5. Vérification de la convergence de $Sh_i(t^*_k)$ \vspace{-0.3cm}
+	\begin{align*}
+	|Sh_i(t^*_k) - Sh_{exp}(t^*_k)| < \epsilon \;?
+	\end{align*} 
+};
+\begin{scope}[start branch]
+	\node[punktchain2, on chain=going right] (6) { \vspace{-0.5cm}
+		\begin{align*} 
+		6. \;\; \hat{S}^*(t^*_k) &= S^*_i(t^*_k) \\
+		i &= i+1
+		\end{align*}
+	};
+\end{scope}
+\draw[->, thick,>=stealth] (5) -- node [above] {non} (6);
+\draw[dashed,->, ultra thick,>=stealth] (6.north) |- (1.east);
+\node[punktchain] (7) { \vspace{-0.5cm}
+	\begin{align*}
+	7.\;\; S^*_{inv}(t^*_k) = S^*_i(t^*_k) &\quad\;  Sh_{inv}(t^*_k) = Sh_i(t^*_k)\\
+	\hat{S}^*(t^*_{k+1}) &= S^*_i(t^*_k) \\
+	k &= k+1
+	\end{align*}
+};
+\draw[->, thick,>=stealth] (5) -- node [left] {oui} (7);
+\node[on chain=going left] (caca) {};
+\draw[dashed,->, ultra thick,>=stealth] (7.west) -- (caca.center)  |- (1);
+\end{tikzpicture}
+\end{figure}
+
+
+%=== flowchart inverse method ===%
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\draw rectangle(3,0.9) node[pos=.5] {Mesures de $I_{exp}$};
+\draw[thick,->,>=stealth] (1.5,0) |- +(1,-0.65) node[right] (a){$\Sh_{exp}$};%(a);
+\draw[thick,->,>=stealth] (a) -- node[above=-0.05cm]{\color{blue}\footnotesize \textit{Lévêque}} +(2.5,0) node[right](b){$S_{inv}$};
+\draw[thick,->,>=stealth] (b) --  node[above]{\color{blue}\footnotesize \textit{Calcul}} +(2.5,0) node[right](b1){$\Sh_{inv}$};
+\draw[thick,->,>=stealth] (b1) -- +(0,-0.9) node[below](c) {$\quad\Sh_{inv} = \Sh_{exp}$?};
+\draw[->,dashed,>=stealth] ($(c)-(1.2,0)$) -| node[below=0.3cm, right=0.55cm] {\footnotesize \color{red} non} node[above=0.25cm, right=0.15cm,] {\color{blue}\scriptsize \textit{Correction}} (b);
+\draw[->,thick,double,>=stealth] (c) -- node[below]{\footnotesize \color{green!50!black} oui} +(3,0) node[right]{$S_{inv}=S_{exp}$};
+\end{tikzpicture}
+\end{figure}
+
+\end{document}

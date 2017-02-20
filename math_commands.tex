@@ -1,0 +1,118 @@
+%% Commande supplémentaire
+
+% semi-norm of a vector
+\newcommand{\snorm}[1]{\left| #1 \right|}
+% norm of a vector
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+% degree symbol
+\newcommand{\degree}[0]{^\circ} 
+% rename builtin command \v{} to \vaccent{}
+\let\vaccent=\v 
+% for vectors
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} 
+% for vectors of Greek letters
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+% for unit vector
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}}	
+% for tensors
+%\newcommand{\tn}[1]{\ensuremath{\pmb{\mathsf{#1}}}} 
+% for tensors of Greek letters
+\newcommand{\tn}[1]{\ensuremath{\mbox{\boldmath$\mathsf{#1}$}}} 
+% for absolute value
+\newcommand{\abs}[1]{\left| #1 \right|}	
+% for average
+\newcommand{\avg}[1]{\left< #1 \right>} 
+% rename builtin command \d{} to \underdot{}
+\let\underdot=\d 
+% for derivatives
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} 
+% for double derivatives
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} 
+% for partial derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+% for double partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
+% for crossed double partial derivatives
+\newcommand{\pdx}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}} 
+% for thermodynamic partial derivatives
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2} \right)_{#3}} 
+% for Dirac bras
+\newcommand{\ket}[1]{\left| #1 \right>} 
+% for Dirac kets
+\newcommand{\bra}[1]{\left< #1 \right|} 
+% for Dirac brackets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right| \left. #2 \vphantom{#1} \right>} 
+% for Dirac matrix elements
+\newcommand{\matrixel}[3]{\left< #1 \vphantom{#2#3} \right| #2 \left| #3 \vphantom{#1#2} \right>} 
+% for gradient
+\newcommand{\grad}[1]{\gv{\nabla} #1}
+% rename builtin command \div to \divsymb
+\let\divsymb=\div 
+% for divergence
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} 
+% for curl
+\newcommand{\curl}[1]{\gv{\nabla} \times #1} 
+% for laplacian
+\newcommand{\lap}[1]{\gv{\nabla}^2 #1}
+% Math text
+\newcommand{\mt}[1]{\mathrm{#1}} 
+% Overline
+\newcommand{\ol}[1]{\overline{#1}}
+% Partial derivative with dfrac
+\newcommand{\dpd}[2]{\dfrac{\partial #1}{\partial #2}}
+% Scientific notation
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+% Symbole degré
+\renewcommand{\deg}{$^{\circ}\;$}
+
+% text style
+%
+\newcommand{\Ae}{\text{\normalshape a.e.}}
+% c'est-à-dire
+\newcommand{\ie}{\textit{i.e.}\ }
+% e.g. - par exemple
+\newcommand{\eg}{\textit{e.g.}\ }
+\newcommand{\strong}{\text{\normalshape -strong}}
+\newcommand{\weak}{\text{\normalshape -weak}}
+\newcommand{\loc}{\text{\normalshape loc}}
+\newcommand{\ad}{\text{\normalshape ad}}
+% Symbole degré
+\renewcommand{\deg}{$^{\circ}\;$}
+% Accronymes
+\newcommand{\PIV}{\textit{PIV}\ }
+
+% Space operator
+\newcommand{\Def}{\overset{\text{\textup{def}}}{=}}
+\newcommand{\R}{\operatorname{\mathbb R}}
+\newcommand{\Rn}{\operatorname{{\mathbb R}^N}}
+\newcommand{\RK}{\operatorname{{\mathbb R}^K}}
+\newcommand{\N}{\operatorname{\mathbb N}}
+\newcommand{\Z}{\operatorname{\mathbb Z}}
+\newcommand{\ON}{\operatorname{\text{\textup{O(N)}}}}
+\newcommand{\opt}{\mathrm{opt}}
+
+% Matrix operator
+\newcommand{\transp}{\:{}^*\,\negmedspace}
+\newcommand{\trans}{\:{}^* \negmedspace}
+\newcommand{\transm}{\:{}^* \!\negmedspace}
+\newcommand{\tran}{{}^* \negmedspace}
+
+% Environnement pour les Théorème, lemmes et remarques
+\newtheorem{theoreme}{Th\'{e}or\`{e}me}
+\newtheorem{lemme}{Lemme}
+\newtheorem{remarque}{Remarque}
+\newtheorem{prop}{Proposition}
+\newtheorem{hypo}{Hypoth\`{e}se}
+\newtheorem{dfn}{D\'{e}finition}
+
+% Variables
+\newcommand{\constant}[1]{\mathit{#1}}
+\renewcommand\Re{\constant{Re}}  % Reynolds number
+\newcommand\Pe{\constant{Pe}}  % Peclet number
+\newcommand\Nu{\constant{Nu}}  % Nusselt number
+\newcommand\Sh{\constant{Sh}}  % Sherwood number
+\newcommand\Sc{\constant{Sc}}  % Schmidt number
+\renewcommand\Pr{\constant{Pr}}  % Prandlt number
+% Trucs de chimie
+\newcommand\el{\mathrm{e^-}}
+\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}

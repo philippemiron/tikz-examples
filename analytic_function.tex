@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{geometry}
+ \geometry{
+ letterpaper,
+ left=1in,
+ right=1in,
+ top=1in,
+ bottom=1in,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath,float}
+\floatplacement{figure}{H}
+\usepackage{hyperref}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.12}
+
+\graphicspath{{./images/}}
+\input{math_commands}
+
+% used tikz libraries
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{trees}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{chains}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes}
+\usetikzlibrary{matrix}
+
+\begin{document}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+
+% plot curve for first axis
+\begin{axis}[
+width=11cm,
+height=8cm,
+xmin=0, xmax=1,
+ylabel={$u_1$ [m/s]},
+xlabel={$t^*$},
+axis y line=left,
+legend style={draw=none}
+]
+\addplot[mark=o] table[x index=0,y index=1] {data/moy_phase_4hz.dat};
+
+% add label to access plot from first axis
+\label{plot_one};
+\end{axis}
+
+% plot curves for second axis
+\begin{axis}[
+width=11cm,
+height=8cm,
+xmin=0, xmax=1,
+ylabel={$u_2$ [m/s]},
+xlabel={$t^*$},
+axis y line=right,
+ylabel style={yshift=-0.5em},
+axis x line=none
+]
+
+% add the item of the first axis referencing axis !!
+\addlegendimage{/pgfplots/refstyle=plot_one}\addlegendentry{$u_1$: Piston, 4~Hz}
+
+% then we use add plot for curves on second axis
+\addplot[color=red,mark=x] table[x index=0,y index=1] {data/moy_phase_34hz.dat};
+\addplot[domain=0:1,dashed,thick]{0.030759*sin(deg(2*pi*x)-7)+0.730899065};
+
+% that we also create legend entry
+\addlegendentry{$u_2$: P.-à-f., 34~Hz}
+\addlegendentry{Fonction sinus}
+\end{axis}
+\end{tikzpicture}
+\caption{Two axis from different file using one combined legend}
+\end{figure}
+
+\end{document}
