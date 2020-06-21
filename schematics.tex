@@ -37,6 +37,52 @@
 
 \begin{document}
 
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+    % two bins
+	\draw[thick] (0,0) rectangle (2,2);
+	\draw[thick] (4,1.5)   rectangle (4+2,1.5+2);	
+	\node at (0.25, -0.25) {$B_i$};
+	\node at (5.75, 1.25) {$B_j$};
+	\node at (1, 2.5) {$P_{ij} = 3/5$};
+	
+	% particles def
+    \coordinate (A0) at (1.8, 1.8);
+    \coordinate (AT) at (4.2, 3);
+    \draw (A0) circle (0.07cm);
+    \draw[fill=black] (AT) circle (0.07cm);
+    
+    \coordinate (B0) at (1, 1);
+    \coordinate (BT) at (5, 3);
+    \draw (B0) circle (0.07cm);
+    \draw[fill=black] (BT) circle (0.07cm);
+    
+    \coordinate (C0) at (1.5, 0.5);
+    \coordinate (CT) at (5.6, 2);
+    \draw (C0) circle (0.07cm);
+    \draw[fill=black] (CT) circle (0.07cm);
+    
+    \coordinate (D0) at (0.5, 1.5);
+    \coordinate (DT) at (-1, 2);
+    \draw (D0) circle (0.07cm);
+    \draw[fill=black] (DT) circle (0.07cm);
+    
+    \coordinate (E0) at (0.2, 0.3);
+    \coordinate (ET) at (-0.5, 1);
+    \draw (E0) circle (0.07cm);
+    \draw[fill=black] (ET) circle (0.07cm);
+	
+	\draw[thick,->,>=stealth] (A0) to [out=45, in=135] (AT);	
+	\draw[thick,->,>=stealth] (B0) to [out=0, in=-75] (BT);	
+	\draw[thick,->,>=stealth] (C0) to [out=-35, in=-95] (CT);
+	\draw[thick,->,>=stealth] (D0) to [out=120, in=45] (DT);
+	\draw[thick,->,>=stealth] (E0) to [out=135, in=-95] (ET);	
+\end{tikzpicture}
+\end{figure}
+
+
 \begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
